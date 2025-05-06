@@ -1,20 +1,74 @@
-# Cybersecurityprojects
-Encryption and Decryption Files
-# 🔐 File Encryption and Decryption Tool (AES, PyQt5)
+1️ Project Overview
+This project is a desktop application built in Python that enables users to securely encrypt and decrypt files using a password, through a graphical user interface (GUI) created with PyQt5.
 
-This project is a secure file encryption and decryption tool using AES encryption with a graphical user interface built in PyQt5.
+It uses AES (Advanced Encryption Standard), one of the most trusted and widely used symmetric encryption algorithms in the world.
 
-## 🚀 Features
+2️ Why This Project Matters
+ Real-World Use Cases:
+Encrypting sensitive documents like contracts, legal records, financial data.
 
-- AES-256 encryption in CBC mode
-- Password-based encryption using PBKDF2
-- Salt and IV auto-handling
-- Simple GUI for selecting files
-- Cross-platform (Windows, macOS, Linux)
+Secure file sharing, especially in remote or cloud-based environments.
 
-## 🛠 Requirements
+Basic personal security: protecting your files on shared or public systems.
 
-Install dependencies with:
+ Security Motivation:
+Plain files can be easily opened or stolen.
 
-```bash
-pip install -r requirements.txt
+Encryption transforms readable data into ciphertext — unreadable without the correct password/key.
+
+AES offers strong protection, even against advanced attacks.
+
+3️ Core Components of the Project
+ A. Cryptographic Logic (in crypto_utlis.py)
+ AES Encryption Process:
+Password Input: The user provides a password.
+
+Salt Generation: A random 16-byte salt is generated. Salt prevents the same password from producing the same key.
+
+Key Derivation with PBKDF2:
+
+PBKDF2 (Password-Based Key Derivation Function 2) uses the password + salt to derive a strong encryption key.
+
+This slows down brute-force attacks.
+
+AES Algorithm:
+
+Operates in CBC (Cipher Block Chaining) mode.
+
+Requires a random Initialization Vector (IV) (also 16 bytes).
+
+Padding: Data is padded to match AES’s block size (128-bit or 16 bytes).
+
+Encryption: The plaintext file content is encrypted with the AES key.
+
+Output Format: Final encrypted data = salt + iv + ciphertext.
+
+  AES Decryption Process:
+Extract salt, iv, and ciphertext from the encrypted file.
+
+Re-derive the AES key from the password and salt using PBKDF2.
+
+Decrypt ciphertext using AES + IV.
+
+Remove padding and return the original plaintext.
+
+ B. GUI Interface (in encrptor_gui.py)
+GUI Elements:
+Password field: To enter encryption/decryption key.
+
+Encrypt Button: Opens file dialog → encrypts the selected file.
+
+Decrypt Button: Opens file dialog → decrypts selected .aes file.
+
+Quit Button: Exits the app.
+
+Background Image: Enhances visual appeal via CSS in setStyleSheet().
+
+Workflow:
+User enters a password.
+
+Chooses a file through a dialog.
+
+Clicks either Encrypt or Decrypt.
+
+Receives success or error message.
